@@ -4,19 +4,19 @@ import Timer from "../TImer/TImer";
 import './IVO.css';
 import Web3 from "web3/dist/web3.min.js";
 import Web3Modal from "web3modal";
-const IVO =() =>{
-     const sendTransaction=async()=>{
+const IVO = () => {
+    const sendTransaction = async () => {
         let web3modal = new Web3Modal({
             network: "mainnet",
             cacheProvider: false,
-            theme:"dark"
-        
-          });
-          console.log('function called')
-          let round
-          let amount
-          let tokencontractAddress='0xB5047153afCc59523F7f6D6F492f716a21B04681'
-          let tokenAbi=[
+            theme: "dark"
+
+        });
+        console.log('function called')
+        let round
+        let amount
+        let tokencontractAddress = '0xB5047153afCc59523F7f6D6F492f716a21B04681'
+        let tokenAbi = [
             {
                 "inputs": [],
                 "payable": false,
@@ -410,47 +410,117 @@ const IVO =() =>{
                 "type": "function"
             }
         ]
-          
-          let contractAddress='0x735f6e949D39f02BaD26d1698A558a629D416265'
-          let abi=[{"inputs":[{"internalType":"address","name":"_usdt_add","type":"address"},{"internalType":"address","name":"_buy_token_add","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"buy_token_add","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_referral","type":"address"}],"name":"buy_tokens","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_upper_limit","type":"uint256"},{"internalType":"uint256","name":"_round","type":"uint256"}],"name":"change_upperLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_num","type":"uint256"}],"name":"claim_bought_tokens","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"claim_ref_tokens","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getAll_Buyings","outputs":[{"components":[{"internalType":"uint256","name":"investedAmount","type":"uint256"},{"internalType":"uint256","name":"claim_Time","type":"uint256"},{"internalType":"uint256","name":"buying_Time","type":"uint256"},{"internalType":"uint256","name":"investmentNum","type":"uint256"},{"internalType":"uint256","name":"unstakeTime","type":"uint256"},{"internalType":"bool","name":"claimed","type":"bool"}],"internalType":"struct DOI.allInvestments[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"get_claim_ref_tokens","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"get_claimable_tokens","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"num","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"round","outputs":[{"internalType":"uint256","name":"upper_limit","type":"uint256"},{"internalType":"uint256","name":"quantity","type":"uint256"},{"internalType":"uint256","name":"total_limit","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"time_end","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_owner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"usdt_address","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"user","outputs":[{"internalType":"uint256","name":"tokens_for_claiming","type":"uint256"},{"internalType":"address","name":"referralFrom","type":"address"},{"internalType":"bool","name":"investBefore","type":"bool"},{"internalType":"uint256","name":"ref_tokens_claiming","type":"uint256"},{"internalType":"uint256","name":"total_investments","type":"uint256"}],"stateMutability":"view","type":"function"}]
-          let provider = await web3modal.connect()
-          let web3 = new Web3(provider)
-          let contractInstance= new web3.eth.Contract(abi,contractAddress)
-          let tokencontractinstance=new web3.eth.Contract(tokenAbi,tokencontractAddress)
-          contractInstance.methods.num().call().then((result=>{
-              round=result
-              console.log(result)
-            if (round==1) {
-                amount=((100000000000).toString())+'000000000'
+        let owner
+        let contractAddress = '0x735f6e949D39f02BaD26d1698A558a629D416265'
+        let abi = [{ "inputs": [{ "internalType": "address", "name": "_usdt_add", "type": "address" }, { "internalType": "address", "name": "_buy_token_add", "type": "address" }], "stateMutability": "nonpayable", "type": "constructor" }, { "inputs": [], "name": "buy_token_add", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_referral", "type": "address" }], "name": "buy_tokens", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_upper_limit", "type": "uint256" }, { "internalType": "uint256", "name": "_round", "type": "uint256" }], "name": "change_upperLimit", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_num", "type": "uint256" }], "name": "claim_bought_tokens", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "claim_ref_tokens", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "getAll_Buyings", "outputs": [{ "components": [{ "internalType": "uint256", "name": "investedAmount", "type": "uint256" }, { "internalType": "uint256", "name": "claim_Time", "type": "uint256" }, { "internalType": "uint256", "name": "buying_Time", "type": "uint256" }, { "internalType": "uint256", "name": "investmentNum", "type": "uint256" }, { "internalType": "uint256", "name": "unstakeTime", "type": "uint256" }, { "internalType": "bool", "name": "claimed", "type": "bool" }], "internalType": "struct DOI.allInvestments[]", "name": "", "type": "tuple[]" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "get_claim_ref_tokens", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "get_claimable_tokens", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "num", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "round", "outputs": [{ "internalType": "uint256", "name": "upper_limit", "type": "uint256" }, { "internalType": "uint256", "name": "quantity", "type": "uint256" }, { "internalType": "uint256", "name": "total_limit", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "time_end", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_owner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "usdt_address", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "user", "outputs": [{ "internalType": "uint256", "name": "tokens_for_claiming", "type": "uint256" }, { "internalType": "address", "name": "referralFrom", "type": "address" }, { "internalType": "bool", "name": "investBefore", "type": "bool" }, { "internalType": "uint256", "name": "ref_tokens_claiming", "type": "uint256" }, { "internalType": "uint256", "name": "total_investments", "type": "uint256" }], "stateMutability": "view", "type": "function" }]
+        let provider = await web3modal.connect()
+        let web3 = new Web3(provider)
+        let contractInstance = new web3.eth.Contract(abi, contractAddress)
+        let tokencontractinstance = new web3.eth.Contract(tokenAbi, tokencontractAddress)
+        contractInstance.methods.num().call().then((result => {
+            round = result
+            console.log(result)
+            contractInstance.methods.owner().call().then((result) => {
+                owner = result
+                console.log(owner)
+            })
+            if (round == 1) {
+                amount = ((100000000000).toString()) + '000000000'
             }
-            if (round==2) {
-                amount=((500000000000).toString())+'000000000'
+            if (round == 2) {
+                amount = ((500000000000).toString()) + '000000000'
             }
-            if (round==3) {
-                amount=((1000000000000).toString())+'000000000'
+            if (round == 3) {
+                amount = ((1000000000000).toString()) + '000000000'
             }
             let acc = web3.eth.getAccounts()
-          let address=document.getElementById('addressValue').value
-          console.log(address)
-          acc.then((result)=>{
-              const txapprove={
-                  from:result[0],
-                  to:tokencontractAddress,
-                  data:tokencontractinstance.methods.approve('0x735f6e949D39f02BaD26d1698A558a629D416265','500000000000000000000').encodeABI()
-              }
-              web3.eth.sendTransaction(txapprove).then(console.log)
-              const tx={
+            let address = document.getElementById('addressValue').value
+            console.log(address)
+            acc.then((result) => {
+                const txapprove = {
+                    from: result[0],
+                    to: tokencontractAddress,
+                    data: tokencontractinstance.methods.approve(owner, '500000000000000000000').encodeABI()
+                }
+                web3.eth.sendTransaction(txapprove).then(console.log)
+                const tx = {
+                    from: result[0],
+                    to: contractAddress,
+                    data: contractInstance.methods.buy_tokens(address).encodeABI()
+                }
+                web3.eth.sendTransaction(tx).then(console.log)
+            })
+        }))
+        
+
+    }
+    const buy = async () => {
+        let web3modal = new Web3Modal({
+            network: "mainnet",
+            cacheProvider: false,
+            theme:"dark"
+        
+          });
+          let contractAddress = '0x735f6e949D39f02BaD26d1698A558a629D416265'
+          let abi = [{ "inputs": [{ "internalType": "address", "name": "_usdt_add", "type": "address" }, { "internalType": "address", "name": "_buy_token_add", "type": "address" }], "stateMutability": "nonpayable", "type": "constructor" }, { "inputs": [], "name": "buy_token_add", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_referral", "type": "address" }], "name": "buy_tokens", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_upper_limit", "type": "uint256" }, { "internalType": "uint256", "name": "_round", "type": "uint256" }], "name": "change_upperLimit", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_num", "type": "uint256" }], "name": "claim_bought_tokens", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "claim_ref_tokens", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "getAll_Buyings", "outputs": [{ "components": [{ "internalType": "uint256", "name": "investedAmount", "type": "uint256" }, { "internalType": "uint256", "name": "claim_Time", "type": "uint256" }, { "internalType": "uint256", "name": "buying_Time", "type": "uint256" }, { "internalType": "uint256", "name": "investmentNum", "type": "uint256" }, { "internalType": "uint256", "name": "unstakeTime", "type": "uint256" }, { "internalType": "bool", "name": "claimed", "type": "bool" }], "internalType": "struct DOI.allInvestments[]", "name": "", "type": "tuple[]" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "get_claim_ref_tokens", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "get_claimable_tokens", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "num", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "round", "outputs": [{ "internalType": "uint256", "name": "upper_limit", "type": "uint256" }, { "internalType": "uint256", "name": "quantity", "type": "uint256" }, { "internalType": "uint256", "name": "total_limit", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "time_end", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_owner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "usdt_address", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "user", "outputs": [{ "internalType": "uint256", "name": "tokens_for_claiming", "type": "uint256" }, { "internalType": "address", "name": "referralFrom", "type": "address" }, { "internalType": "bool", "name": "investBefore", "type": "bool" }, { "internalType": "uint256", "name": "ref_tokens_claiming", "type": "uint256" }, { "internalType": "uint256", "name": "total_investments", "type": "uint256" }], "stateMutability": "view", "type": "function" }]
+          let provider = await web3modal.connect()
+          let web3 = new Web3(provider)
+          let contractInstance = new web3.eth.Contract(abi, contractAddress)
+          web3.eth.getAccounts().then((result)=>{
+              let tx={
                   from:result[0],
                   to:contractAddress,
-                  data:contractInstance.methods.buy_tokens(address).encodeABI()
+                  data:contractInstance.methods.claim_bought_tokens().encodeABI()
               }
               web3.eth.sendTransaction(tx).then(console.log)
+              getdata()
           })
-          }))
-          
+
     }
-    return(
-        <section className="main_section">
+    const claim=async()=>{
+        let web3modal = new Web3Modal({
+            network: "mainnet",
+            cacheProvider: false,
+            theme:"dark"
+        
+          });
+          let contractAddress = '0x735f6e949D39f02BaD26d1698A558a629D416265'
+          let abi = [{ "inputs": [{ "internalType": "address", "name": "_usdt_add", "type": "address" }, { "internalType": "address", "name": "_buy_token_add", "type": "address" }], "stateMutability": "nonpayable", "type": "constructor" }, { "inputs": [], "name": "buy_token_add", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_referral", "type": "address" }], "name": "buy_tokens", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_upper_limit", "type": "uint256" }, { "internalType": "uint256", "name": "_round", "type": "uint256" }], "name": "change_upperLimit", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_num", "type": "uint256" }], "name": "claim_bought_tokens", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "claim_ref_tokens", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "getAll_Buyings", "outputs": [{ "components": [{ "internalType": "uint256", "name": "investedAmount", "type": "uint256" }, { "internalType": "uint256", "name": "claim_Time", "type": "uint256" }, { "internalType": "uint256", "name": "buying_Time", "type": "uint256" }, { "internalType": "uint256", "name": "investmentNum", "type": "uint256" }, { "internalType": "uint256", "name": "unstakeTime", "type": "uint256" }, { "internalType": "bool", "name": "claimed", "type": "bool" }], "internalType": "struct DOI.allInvestments[]", "name": "", "type": "tuple[]" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "get_claim_ref_tokens", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "get_claimable_tokens", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "num", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "round", "outputs": [{ "internalType": "uint256", "name": "upper_limit", "type": "uint256" }, { "internalType": "uint256", "name": "quantity", "type": "uint256" }, { "internalType": "uint256", "name": "total_limit", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "time_end", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_owner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "usdt_address", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "user", "outputs": [{ "internalType": "uint256", "name": "tokens_for_claiming", "type": "uint256" }, { "internalType": "address", "name": "referralFrom", "type": "address" }, { "internalType": "bool", "name": "investBefore", "type": "bool" }, { "internalType": "uint256", "name": "ref_tokens_claiming", "type": "uint256" }, { "internalType": "uint256", "name": "total_investments", "type": "uint256" }], "stateMutability": "view", "type": "function" }]
+          let provider = await web3modal.connect()
+          let web3 = new Web3(provider)
+          let contractInstance = new web3.eth.Contract(abi, contractAddress)
+          web3.eth.getAccounts().then((result)=>{
+              let tx={
+                  from:result[0],
+                  to:contractAddress,
+                  data:contractInstance.methods.claim_ref_tokens().encodeABI()
+              }
+              web3.eth.sendTransaction(tx).then(console.log)
+              getdata()
+          })
+    }
+    const getdata=async()=>{
+        let web3modal = new Web3Modal({
+            network: "mainnet",
+            cacheProvider: false,
+            theme:"dark"
+        
+          });
+          let contractAddress = '0x735f6e949D39f02BaD26d1698A558a629D416265'
+          let abi = [{ "inputs": [{ "internalType": "address", "name": "_usdt_add", "type": "address" }, { "internalType": "address", "name": "_buy_token_add", "type": "address" }], "stateMutability": "nonpayable", "type": "constructor" }, { "inputs": [], "name": "buy_token_add", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_referral", "type": "address" }], "name": "buy_tokens", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_upper_limit", "type": "uint256" }, { "internalType": "uint256", "name": "_round", "type": "uint256" }], "name": "change_upperLimit", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_num", "type": "uint256" }], "name": "claim_bought_tokens", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "claim_ref_tokens", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "getAll_Buyings", "outputs": [{ "components": [{ "internalType": "uint256", "name": "investedAmount", "type": "uint256" }, { "internalType": "uint256", "name": "claim_Time", "type": "uint256" }, { "internalType": "uint256", "name": "buying_Time", "type": "uint256" }, { "internalType": "uint256", "name": "investmentNum", "type": "uint256" }, { "internalType": "uint256", "name": "unstakeTime", "type": "uint256" }, { "internalType": "bool", "name": "claimed", "type": "bool" }], "internalType": "struct DOI.allInvestments[]", "name": "", "type": "tuple[]" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "get_claim_ref_tokens", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "get_claimable_tokens", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "num", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "round", "outputs": [{ "internalType": "uint256", "name": "upper_limit", "type": "uint256" }, { "internalType": "uint256", "name": "quantity", "type": "uint256" }, { "internalType": "uint256", "name": "total_limit", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "time_end", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_owner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "usdt_address", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "user", "outputs": [{ "internalType": "uint256", "name": "tokens_for_claiming", "type": "uint256" }, { "internalType": "address", "name": "referralFrom", "type": "address" }, { "internalType": "bool", "name": "investBefore", "type": "bool" }, { "internalType": "uint256", "name": "ref_tokens_claiming", "type": "uint256" }, { "internalType": "uint256", "name": "total_investments", "type": "uint256" }], "stateMutability": "view", "type": "function" }]
+          let provider = await web3modal.connect()
+          let web3 = new Web3(provider)
+          let contractInstance = new web3.eth.Contract(abi, contractAddress)
+          contractInstance.methods.get_claimable_tokens().call().then((result)=>{
+              document.getElementById('balance').innerText=result
+          })
+          contractInstance.methods.get_claim_ref_tokens().call().then((result)=>{
+              document.getElementById("ref").innerText=result
+          })
+
+    }
+    return (
+        <section className="main_section" onLoad={getdata}>
             <Nevigation></Nevigation>
 
             <Timer></Timer>
@@ -486,7 +556,7 @@ const IVO =() =>{
                 <div className="click" onClick={sendTransaction}>
                     <a href="#">click</a>
                 </div>
-                
+
                 <div className="rule_price">
                     <h1>Price  1USTD = 100000000RAC</h1>
                 </div>
@@ -495,16 +565,16 @@ const IVO =() =>{
 
 
                 <div className="rule_common_div">
-                  <div className="text">$RAC Available</div>
-                  <div className="number">0</div>
-                  <div className="btn"><a href="#">Claim</a></div>
+                    <div className="text">$RAC Available</div>
+                    <div className="number" id="balance">0</div>
+                    <div className="btn" onClick={buy}><a href="#">Claim</a></div>
 
                 </div>
 
                 <div className="rule_common_div">
-                  <div className="text">$RAC Awaiting Release</div>
-                  <div className="number">0</div>
-                  <div className="btn"></div>
+                    <div className="text">$RAC Awaiting Release</div>
+                    <div className="number">0</div>
+                    <div className="btn"></div>
 
                 </div>
 
@@ -525,23 +595,23 @@ const IVO =() =>{
 
 
             <div className="referals_div">
-            <h1>BASE IVO AMOUNT</h1>
-            <div className="rule_common_div">
-                  <div className="text">$RAC Awaiting Release</div>
-                  <div className="number">0</div>
-                  <div className="btn"><a href="#">Claim</a></div>
+                <h1>BASE IVO AMOUNT</h1>
+                <div className="rule_common_div">
+                    <div className="text">$RAC Awaiting Release</div>
+                    <div className="number">0</div>
+                    <div className="btn"><a href="#">Claim</a></div>
 
                 </div>
                 <div className="rule_common_div">
-                  <div className="text">$RAC Awaiting Release</div>
-                  <div className="number">0</div>
-                  <div className="btn"></div>
+                    <div className="text">$RAC Awaiting Release</div>
+                    <div className="number">0</div>
+                    <div className="btn"></div>
 
                 </div>
                 <div className="rule_common_div">
-                  <div className="text">NFT to be claimed</div>
-                  <div className="number">0</div>
-                  <div className="btn"><a href="#">Claim</a></div>
+                    <div className="text">NFT to be claimed</div>
+                    <div className="number" id="ref">0</div>
+                    <div className="btn" onClick={claim}><a href="#">Claim</a></div>
 
                 </div>
 
@@ -562,11 +632,11 @@ const IVO =() =>{
                     <p><span className="rule_number">3:</span> NFT was free casting during only in the IVO stage，so it's number is fixed. </p>
 
                     <p><span className="rule_number">4:</span>After $RAC is launched on PancakeSwap, you can go to the official website to receive the unlocked $RAC.</p>
-                    
 
 
 
-                    </div>
+
+                </div>
 
 
             </div>
@@ -616,14 +686,14 @@ const IVO =() =>{
 
             <div className="my_nft">
                 <h1>MY MFT <snap className="contract">NFT Contract Address</snap></h1>
-               
-               <h2> <span className="address">0xd888fB9c23297a080FE4881F4eb7F361cCD37B9F</span></h2>
+
+                <h2> <span className="address">0xd888fB9c23297a080FE4881F4eb7F361cCD37B9F</span></h2>
             </div>
 
 
             <div className="last_div">
                 <div className="rules">
-                <h3>Raccoon DAO NFTs are the core signals of the RAC ecosystem. With the development of the project, in addition to the fee dividends, it will also receive that as below:</h3>
+                    <h3>Raccoon DAO NFTs are the core signals of the RAC ecosystem. With the development of the project, in addition to the fee dividends, it will also receive that as below:</h3>
                     <p><span className="rule_number">1:</span>Dividends from advertising platform revenue </p>
                     <p><span className="rule_number">2:</span> Earning dividends from NFTs trade platform  </p>
                     <p><span className="rule_number">3:</span>Metaverse dApps Token airdrop  </p>
@@ -631,20 +701,20 @@ const IVO =() =>{
                     <p><span className="rule_number">4:</span>Free file usage storage </p>
                     <p><span className="rule_number">5:</span>Dividends of other web3 dApps benefits in the future  </p>
                     <p><span className="rule_number">6:</span>A The preemptive right of purchase Metaverse Space(Space is more valuable than Land)  </p>
-              
-                    
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
+
+
                     {/* <h2 className="rule_number">1:</h2><p>  Dividends from advertising platform revenue   </p>
                     <h2 className="rule_number">2:</h2><p>  Earning dividends from NFTs trade platform   </p>
                     <h2 className="rule_number">3:</h2><p>  Metaverse dApps Token airdrop   </p>
                     <h2 className="rule_number">4:</h2><p>  Free file usage storage  </p>
                     <h2 className="rule_number">5:</h2><p>  Dividends of other web3 dApps benefits in the future </p>
                     <h2 className="rule_number">6:</h2><p>  The preemptive right of purchase Metaverse Space(Space is more valuable than Land) </p> */}
-                    </div>
+                </div>
 
 
             </div>
